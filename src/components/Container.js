@@ -30,12 +30,14 @@ class Container extends Component {
 
 
   componentDidMount() {
+    // Fetch top story IDs
     this.fetchTopStories('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
   }
 
   render() {
     const { ids, error, isLoading } = this.state;
 
+    // Display error or loading based on state
     if (error) {
       return <div className="contain container"> <div className="contain--alert">Sorry, an error has occured.</div></div>;
     }
@@ -43,14 +45,10 @@ class Container extends Component {
     if (isLoading || ids.length < 1) {
       return <div className="contain container"> <div className="contain--alert">Getting top stories...</div></div>;
     }
-
+    // If there are top IDs returned, pass them to the blocks to render the stories
     return (
-      <div className="container">
-       	<div className="row">
-       		<div className="col-xs-12">
-         		<Block data={ids} />
-         	</div>
-       	</div>
+      <div className="container-fluid">       	
+         <Block data={ids} />
       </div>
     );
   }

@@ -8,10 +8,15 @@ class Block extends Component {
       stories: [],
       ids: this.props.data,
       isLoading: false,
-      error: null
+      error: null,
+      filter: 10
     }
+
+    this.handleClick = this.handleClick.bind(this);
+    this.expandDiv = this.expandDiv.bind(this);
   }
 
+  // Use the ID's passed from the Container component to fetch the top stories and render them below
   fetchStories(ids) {
     const storiesArr = [];
     ids.map((id =>
@@ -30,7 +35,29 @@ class Block extends Component {
     this.setState({isLoading: false })
   }
 
+  // Display more top stories
+  handleClick(e){
+    e.preventDefault();
+    const filter = this.state.filter + 10;
+    this.setState({filter: filter});
+  }
+
+  // Toggle the "view more" for comments or text
+  expandDiv(e){
+    e.preventDefault();
+    const element = this.refs.element;
+    const link = this.refs.link;
+    const linkText = document.getElementById('link').firstChild;
+
+    link.classList.toggle('hidden');
+    linkText.data = linkText.data == "View more..." ? "View less" : "View more...";
+
+    element.classList.toggle('hidden');
+    element.classList.toggle('expand');
+  }
+
   componentDidMount() {
+    // When story IDs have been passed to the component, fetch the top stories with them
     if(this.state.ids.length > 0){
       this.fetchStories(this.state.ids)
     }
@@ -39,6 +66,7 @@ class Block extends Component {
   render() {
     const { stories, error, isLoading } = this.state;
 
+    // Display error or loading based on state
     if (error) {
       return <div className="contain container"><div className="contain--alert">Sorry, an error has occured.</div></div>;
     }
@@ -47,12 +75,12 @@ class Block extends Component {
       return <div className="contain container"><div className="contain--alert">Loading content...</div></div>;
     }
 
-    // by, descendants, id, kids, score, time, title, type, url
+    // If there are stories, show the blocks
     const blocks = stories
-      .filter((item, index) => (index < 50))
+      .filter((item, index) => (index < this.state.filter))
       .map((item, index) => {
         return (
-          <div className="block" key={item.id}>
+          <div className="block col-lg-2 col-md-4 col-xs-12" key={item.id}>
             <div className="block--score">
               <span className="block--triangle"></span>
               <span className="block--num" key={item.score}>{item.score}</span>
@@ -61,7 +89,12 @@ class Block extends Component {
               <h4 className="block--title" key={item.title}><a href={item.url}>{item.title}</a> </h4>
               <span className="block--author">By {item.by} </span>
               {item.comment || item.text &&
-                <p className="block--text">{item.comment || item.text}</p>
+                <p ref="element" className="block--text">{item.comment || item.text}</p>
+              }
+              {item.comment || item.text && !item.url &&
+                <div className="block--link">
+                  <a ref="link" id="link" href="#" onClick={this.expandDiv}>View more...</a>
+                </div>
               }
               {item.url &&
                 <div className="block--link">
@@ -75,7 +108,15 @@ class Block extends Component {
     
     return (
       <div className="wrapper">
-        {blocks}
+        <div className="row">
+          {blocks}
+          {this.state.filter < 500 &&
+            // Only display "View More" if there are more results to view
+            <div className="block block--view-more col-lg-2 col-md-4 col-xs-12" onClick={this.handleClick}>
+              <h2 className="block--view-more-link">View More</h2>
+            </div>
+          }
+        </div>
       </div>
     );
   }

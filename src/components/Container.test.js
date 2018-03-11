@@ -8,7 +8,7 @@ import { shallow } from 'enzyme';
 import Container from './Container';
 
 describe("Container", () => {
-  it("should render my component", () => {
+  it("should render the container", () => {
     const wrapper = shallow(<Container />);
   });
 });

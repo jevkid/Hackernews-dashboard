@@ -2,9 +2,9 @@
 * Colors *
 **********/
 
-@primary: #034378;
-@secondary: #2d4e68;
-@tertiary: #77d7b9;
+@primary: #404040;
+@secondary: #354F52;
+@tertiary: #ff6600;
 
 @black: #000000;
 @white: #FFFFFF;
@@ -14,57 +14,80 @@
 @grey: #e5e5e5;
 @dark-grey:#999999;
 
-
 @body: #333333;
 
+/*******************
+* Fonts and Sizing *
+********************/
+
+@primary-font: "Roboto", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+@secondary-font: "Inconsolata", "Helvetica", "Arial", sans-serif;
+
+h1 {
+  font-size: 2.2em;
+  color: @white !important;
+  font-family: @secondary-font
+}
+
+h4 {
+  font-size: 1.3em;
+}
 
 body {
+  font-family: @primary-font;
   color: @body;
-  background-color: @lightest-grey;
+  background-color: #212121;
 }
+
 /********
 * Block *
 *********/
 .wrapper {
   display: inline-block;
+  margin: 20px;
 }
 
 .block {
   background-color: @white;
   display: inline-block;
-  margin: 10px;
+  margin: 15px;
   padding: 15px;
   top: 0;
   float: left;
   min-height: 215px;
-  height: auto;
-  width: 22%;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 3px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid @grey;
+  
   
   .block--score {
     width: 15%;
     float: left;
     text-align: center;
-
+    color: @tertiary;
     .block--triangle {    
       display: inline-block;
       width: 5px;
       height: 10px;
       border-radius: 3px;
-      border-bottom: solid 15px @dark-grey;
+      border-bottom: solid 15px @tertiary;
       border-left: solid 10px transparent;
       border-right: solid 10px transparent;
     }
-
     .block--num {
-
+      margin: 5px;
     }
   }
 
   .block--title {
-    margin-bottom: -5px;
+    margin-bottom: -3px;
+    a {
+      color: @secondary;
+      &:hover {
+        text-decoration: none;
+        color: @tertiary;
+      }
+    }
   }
   
   .block--content {
@@ -75,13 +98,17 @@ body {
 
     .block--author {
       font-size: 12px;
+      color: @primary;
     }
 
     .block--text {
       margin: 10px 0;
       font-size: 12px;
-      // max-height: 95px;
+      max-height: 95px;
       overflow: hidden;
+      &.expand {
+        max-height: 100%;
+      }
     }
 
     .block--link {
@@ -89,19 +116,57 @@ body {
       font-size: 12px; 
       position: absolute;
       bottom: 0;
-      right: 0;     
+      right: 0; 
+      a {
+        color: @tertiary;
+        &:hover {
+          text-decoration: none;
+          color: @secondary;
+        }
+      }   
+    }
+  }
+
+  &.block--view-more {
+    background-color: @tertiary;
+    text-align: center;
+    border: none;
+    color: @white;
+    font-family: @secondary-font;
+    h2 {
+      margin-top: 35%;
+    }
+    &:hover {
+      background-color: @white;
+      color: @tertiary;
+      cursor: pointer;
     }
   }
 }
-
-
 
 /*********
 * Header *
 **********/
 .header {
   background-color: @primary;
-  padding: 10px;
+  padding: 20px;
+  h1 {
+    display: inline-block;
+  }
+  .header--logo {
+    border-radius: 2px;
+    display: inline-block;
+    color: @white;
+    background-color: @tertiary;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5em;
+    margin-right: 15px;
+  }
+
 }
 
 /************
@@ -115,38 +180,6 @@ body {
     font-size: 1.5em;
     font-weight: 500;
   }
-}
-
-
-/*******************
-* Fonts and Sizing *
-********************/
-
-@font: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
-
-h1 {
-  font-size: 2em;
-  color: @white !important;
-}
-
-h2 {
-  font-size: 1.5em;
-  color: @primary !important;
-}
-
-h3 {
-  font-size: 1.17em;
-  color: @tertiary !important;
-}
-
-h4 {
-  font-size: 1em;
-  color: @black !important;
-}
-
-body {
-  font-family: @font;
-  color: @body;
 }
 
 /*************
@@ -248,19 +281,18 @@ body {
 /**********
 * Buttons *
 ***********/
-.button(@color, @background, @border, @radius, @font-size, @padding, @margin) {
-	color: @color;
-	background-color: @background;
-	border: @border;
-	border-radius: @radius;
-	font-size: @font-size;
+.button {
+	color: @white;
+	background-color: @tertiary;
+	border: 1px solid @tertiary;
+	border-radius: 2px;
+	font-size: 0.85em;
 	-webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  margin: @margin;
-  padding: @padding;
+  margin: 10px 10px 10px 0;
+  padding: 7px;
   text-align: center;
-  text-transform: uppercase;
   position: relative;
   overflow: hidden;
   -webkit-transition: .3s;
@@ -275,28 +307,5 @@ body {
     height: 3px;
     background: #f7f7f7;
   }
-}
-.button-primary {
-	.button(@white, @secondary, 1px solid @secondary, 4px, 0.75em, 20px, 10px);
-	.animation-1(@secondary, @white);
-}
-
-.button-secondary {
-	.button(@white, @primary, 1px solid @primary, 4px, 0.75em, 20px, 10px);
-	.animation-2(@secondary, @white);
-}
-
-.button-clear {
-	.button(@secondary, @white, 1px solid @primary, 4px, 0.75em, 10px 15px, 10px);
-	.animation-3(@white, @secondary);
-}
-
-.button-small {
-	.button(@white, @secondary, 1px solid @secondary, 4px, 0.5em, 10px, 10px);
 	.animation-4(@secondary, @white);
-}
-
-.button-x-small {
-	.button(@white, @secondary, 1px solid @secondary, 4px, 0.5em, 5px, 10px);
-	.animation-5(@secondary, @white);
 }
