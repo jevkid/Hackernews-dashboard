@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import Block from './Block';
 
-import '../styles/main.less';
-
 class Container extends Component {
 	
 	constructor(props) {

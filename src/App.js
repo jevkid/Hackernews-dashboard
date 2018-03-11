@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 import Container from './components/Container';
 import Header from './components/Header';
 
+import './styles/main.less';
+
 render(
   <div>
     <Header text="Hackernews Dashboard" />
