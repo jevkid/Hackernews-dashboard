@@ -1,10 +1,16 @@
 {
-  "name": "Finance-Dashboard",
+  "name": "Hackernews-Dashboard",
   "version": "0.0.1",
-  "description": "Simple dshboard for analysing spending",
+  "description": "Simple dashboard for displaying Hackernews stories",
   "main": "index.js",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.4.1",
     "babel-polyfill": "^6.0.16",
+    "babel-preset-airbnb": "^2.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "react": "^15.6.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.6.2",
@@ -16,10 +22,6 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
     "css-loader": "^0.15.1",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -28,25 +30,29 @@
     "eslint-plugin-react": "^7.7.0",
     "file-loader": "^1.1.9",
     "html-webpack-plugin": "^2.30.1",
+    "jsdom": "^11.6.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
+    "mocha": "^5.0.4",
     "node-libs-browser": "^0.5.2",
+    "react-addons-test-utils": "^15.6.2",
     "style-loader": "^0.12.3",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
+    "test": "mocha -w test/helpers/browser.js test/*.spec.js",
     "build": "webpack",
     "dev": "webpack-dev-server --port 8080"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jevkid/Finance-Dashboard.git"
+    "url": "git+https://github.com/jevkid/Hackernews-Dashboard.git"
   },
   "author": "Megan Jevin",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/jevkid/Finance-Dashboard/issues"
+    "url": "https://github.com/jevkid/Hackernews-Dashboard/issues"
   },
-  "homepage": "https://github.com/jevkid/Finance-Dashboard#readme"
+  "homepage": "https://github.com/jevkid/Hackernews-Dashboard#readme"
 }

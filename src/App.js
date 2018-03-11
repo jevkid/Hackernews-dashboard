@@ -1,10 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 import Container from './components/Container';
+import Header from './components/Header';
 
-ReactDOM.render(
-  <div className="container">
+render(
+  <div>
+    <Header text="Hackernews Dashboard" />
     <Container />
   </div>,
   document.querySelectorAll('#rootElement')[0]

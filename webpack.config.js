@@ -19,6 +19,11 @@ const config = [
     devServer: {
       contentBase: paths.APP_DIR,
     },
+    externals: {
+      'cheerio': 'window',
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': true,
+    },
     module : {
       loaders : [
         {

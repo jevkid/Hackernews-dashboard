@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import Chart from './Chart';
-import Table from './Table';
-import Header from './Header';
+import Block from './Block';
 
 import '../styles/main.less';
 
@@ -12,50 +10,48 @@ class Container extends Component {
     super(props);
 
     this.state = {
-      transactions: [],
+      ids: [],
       isLoading: false,
       error: null
     };
   }
-
-  componentDidMount() {
-  	this.setState({ isLoading: true });
-
-    fetch('http://localhost:3000/transactions')
+  
+  fetchTopStories(url) {
+    this.setState({ isLoading: true });
+    fetch(url)
       .then(response => {
-      	if (response.ok) {
+        if (response.ok) {
           return response.json();
         } else {
           throw new Error('Something went wrong ...');
         }
       })
-      .then(data => this.setState({ transactions: data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .then(data => this.setState({ ids: data, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));   
+  }
+
+
+  componentDidMount() {
+    this.fetchTopStories('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
   }
 
   render() {
-  	const { transactions, isLoading, error } = this.state;
+    const { ids, error, isLoading } = this.state;
 
     if (error) {
-      return <p>{error.message}</p>;
+      return <div className="contain container"> <div className="contain--alert">Sorry, an error has occured.</div></div>;
     }
 
-    if (isLoading || transactions.length <= 0) {
-      return <p>Loading ...</p>;
+    if (isLoading || ids.length < 1) {
+      return <div className="contain container"> <div className="contain--alert">Getting top stories...</div></div>;
     }
-    
+
     return (
       <div className="container">
        	<div className="row">
        		<div className="col-xs-12">
-       			<Header text="Finance Dashboard" />
-       		</div>
-	       	<div className="col-xs-8">
-	       		<Table data={transactions} />
-	       	</div>
-	       	<div className="col-xs-4">
-	       		<Chart />
-	       	</div>
+         		<Block data={ids} />
+         	</div>
        	</div>
       </div>
     );

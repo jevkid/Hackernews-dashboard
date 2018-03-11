@@ -2,9 +2,9 @@
 * Colors *
 **********/
 
-@brand-primary: #0B3948;
-@brand-secondary: #416165;
-@brand-tertiary: #ACB0BD;
+@primary: #034378;
+@secondary: #2d4e68;
+@tertiary: #77d7b9;
 
 @black: #000000;
 @white: #FFFFFF;
@@ -17,25 +17,126 @@
 
 @body: #333333;
 
+
+body {
+  color: @body;
+  background-color: @lightest-grey;
+}
+/********
+* Block *
+*********/
+.wrapper {
+  display: inline-block;
+}
+
+.block {
+  background-color: @white;
+  display: inline-block;
+  margin: 10px;
+  padding: 15px;
+  top: 0;
+  float: left;
+  min-height: 215px;
+  height: auto;
+  width: 22%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 3px 4px rgba(0, 0, 0, 0.2);
+  
+  .block--score {
+    width: 15%;
+    float: left;
+    text-align: center;
+
+    .block--triangle {    
+      display: inline-block;
+      width: 5px;
+      height: 10px;
+      border-radius: 3px;
+      border-bottom: solid 15px @dark-grey;
+      border-left: solid 10px transparent;
+      border-right: solid 10px transparent;
+    }
+
+    .block--num {
+
+    }
+  }
+
+  .block--title {
+    margin-bottom: -5px;
+  }
+  
+  .block--content {
+    width: 80%;
+    float: right;
+    margin: 0;
+    padding: 0;
+
+    .block--author {
+      font-size: 12px;
+    }
+
+    .block--text {
+      margin: 10px 0;
+      font-size: 12px;
+      // max-height: 95px;
+      overflow: hidden;
+    }
+
+    .block--link {
+      margin: 10px 5px;
+      font-size: 12px; 
+      position: absolute;
+      bottom: 0;
+      right: 0;     
+    }
+  }
+}
+
+
+
+/*********
+* Header *
+**********/
+.header {
+  background-color: @primary;
+  padding: 10px;
+}
+
+/************
+* Contain *
+*************/
+.contain {
+  text-align: center;
+  
+  .contain--alert {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+}
+
+
 /*******************
 * Fonts and Sizing *
 ********************/
 
-@brand-font: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+@font: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
 
 h1 {
   font-size: 2em;
-  color: @brand-primary !important;
+  color: @white !important;
 }
 
 h2 {
   font-size: 1.5em;
-  color: @brand-secondary !important;
+  color: @primary !important;
 }
 
 h3 {
   font-size: 1.17em;
-  color: @brand-tertiary !important;
+  color: @tertiary !important;
 }
 
 h4 {
@@ -44,7 +145,7 @@ h4 {
 }
 
 body {
-  font-family: @brand-font;
+  font-family: @font;
   color: @body;
 }
 
@@ -176,197 +277,26 @@ body {
   }
 }
 .button-primary {
-	.button(@white, @brand-secondary, 1px solid @brand-secondary, 4px, 0.75em, 20px, 10px);
-	.animation-1(@brand-secondary, @white);
+	.button(@white, @secondary, 1px solid @secondary, 4px, 0.75em, 20px, 10px);
+	.animation-1(@secondary, @white);
 }
 
 .button-secondary {
-	.button(@white, @brand-primary, 1px solid @brand-primary, 4px, 0.75em, 20px, 10px);
-	.animation-2(@brand-secondary, @white);
+	.button(@white, @primary, 1px solid @primary, 4px, 0.75em, 20px, 10px);
+	.animation-2(@secondary, @white);
 }
 
 .button-clear {
-	.button(@brand-secondary, @white, 1px solid @brand-primary, 4px, 0.75em, 10px 15px, 10px);
-	.animation-3(@white, @brand-secondary);
+	.button(@secondary, @white, 1px solid @primary, 4px, 0.75em, 10px 15px, 10px);
+	.animation-3(@white, @secondary);
 }
 
 .button-small {
-	.button(@white, @brand-secondary, 1px solid @brand-secondary, 4px, 0.5em, 10px, 10px);
-	.animation-4(@brand-secondary, @white);
+	.button(@white, @secondary, 1px solid @secondary, 4px, 0.5em, 10px, 10px);
+	.animation-4(@secondary, @white);
 }
 
 .button-x-small {
-	.button(@white, @brand-secondary, 1px solid @brand-secondary, 4px, 0.5em, 5px, 10px);
-	.animation-5(@brand-secondary, @white);
+	.button(@white, @secondary, 1px solid @secondary, 4px, 0.5em, 5px, 10px);
+	.animation-5(@secondary, @white);
 }
-
-/*********
-* Inputs *
-**********/
-
-// Text input mixin
-.form-input(@width, @padding, @line-height, @font-size){
-  background-color: @lightest-grey;
-  border: 1px solid @grey;
-  border-radius: 3px;
-  text-align: left;
-
-  .transition(0.35s, ease-in-out);
-
-  width: @width;
-  padding: @padding;
-  line-height: @line-height;
-  font-size: @font-size;
-  
-  &:focus {
-    outline: 0;
-    border-color: @brand-primary;
-  }
-
-}
-
-.form-group {
-  label {
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 5px;
-  }
-
-  .form-field-standard {
-    .form-input(100px, 0.40em 0.70em, 1.4, 100%);
-  }
-    
-  .form-field-small {
-    .form-input(75px, 0.40em 0.20em, 1.2, 80%);
-  }
-
-}
-
-// Radio and checkbox mixin
-.check-radio-input(@radius, @content, @font-size, @bottom){
-  input {
-    margin: 0 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    position: relative;
-    top: 5px;
-    height: 20px;
-    width: 20px;
-    transition: all 0.15s ease-out 0s;
-    background: @white;
-    border: 1px solid @brand-secondary;
-    cursor: pointer;
-    display: inline-block;
-    margin-right: 0.5rem;
-    outline: none;
-    border-radius: @radius;
-    
-    &:hover {
-      background: @brand-primary;
-    }
-    
-    &:checked {
-      background: @brand-secondary;
-      color: @white !important;
-    }
-    
-    &:checked::before {
-      height: 20px;
-      width: 20px;
-      position: absolute;    
-      content: @content;
-      color: @white;
-      display: inline-block;
-      font-size: @font-size;
-      bottom: @bottom;
-      right: -1px;
-      text-align: center;
-    }
-    
-    &:checked::after {
-      -webkit-animation: click-wave 0.65s;
-      -moz-animation: click-wave 0.65s;
-      animation: click-wave 0.65s;
-      background:@brand-secondary;
-      content: '';
-      display: block;
-      position: relative;
-      z-index: 100;
-    }
-
-  }
-
-}
-
-.radio-group {
-  .check-radio-input(50%, '\2022', 1.25em, 5.5px);
-}
-
-.checkbox-group {
-  .check-radio-input(20%, '\2713', 1em, 2.5px);  
-}
-
-.select-input(@padding, @font-size){
-  padding: @padding;
-  color: @body;
-  border: 1px solid @light-grey;
-  border-radius: 4px;
-  text-align: left;
-  font-size: @font-size;
-  background-image: none;
-  background-color: @white;
-}
-
-.select-group {
-  label {
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 5px;
-  }
-  
-  .select-standard {
-    .select-input(6px 12px, 14px);
-  }
-    
-  .select-small {
-    .select-input(6px 12px, 14px);
-  }
-}
-
-/*********
-* Panels *
-**********/
-
-.panel {
-
-}
-
-select {
-
-}
-
-/*********
-* Tables *
-**********/
-table {
-  width: 100%;
-  border: 1px solid @grey;
-
-  th {
-    padding: 15px;
-    background-color: @grey;
-  }
-  tr {
-    border-bottom: 1px solid @grey;
-
-  }
-  td {
-    padding: 15px;
-    border-right: 1px solid @grey;
-  }
-}
-
-
